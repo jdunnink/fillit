@@ -1,0 +1,25 @@
+
+
+// thoughts //
+
+by cutting off all empty x and y axis (from the top left corner), a tetromino can be turned into its absolute form, for example:
+
+####    and ....  are the same for this project. By cutting of the empty line at the top they become -> #### and  ####    This works for all valid tetrominos.
+....        ####                                                                                        ....      ....
+....        ....                                                                                        ....      ....
+....        ....                                                                                        ....      ....
+
+
+based on the number of obstacles from the top left corner, it could be possible to avoid having to iterate over every tetromino in order to identify it.
+    --> assuming every tetromino is its absolute form, every valid tetro is distinct within three lines. (could be even shorter)
+
+during validation, the program could also identify which tetromino it is, as control iterates over the grid anyway.
+    
+    -> store valid tetros in a linked list with a specific identifier to mark which tetro it is.
+    -> identifier should be mathematically related to its tetromino, so it can always be recognized.
+    -> rearrange this list to create an order of tetros that would be most probable to fit within a square (probability analysis?) --> most likely not possible due to project restrictions.
+
+running the solver (placing tetros in the square) is very heavy on performance, reducing the number of options as much as possible (more information) could make this process easier.
+    
+    ->  the size of the starting grid should be increased/decreased in relation to the number of tetros that were found, (or even which tetros were found) to avoid attempting to make grids that would not work.
+    -> some sort of implementation with bytes instead of strings (i.e. 1000 instead of "#..."), could potentially increase performance, but is hard to code and debug.
