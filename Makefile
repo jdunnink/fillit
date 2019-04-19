@@ -11,24 +11,46 @@
 #******************************************************************************#
 
 NAME = fillit
-LIB = -L libft/ -lft
-CC = gcc
+
+SRC =	coortoi.c			\
+		itocoor.c			\
+		tetro_translate.c	\
+		to_bits.c			\
+		read_input.c		\
+		main.c 				\
+		validate_tetro.c	\
+
+OBJ = $(SRC:.c=.o)
+
+SRCDIR = srcs
+OBJDIR = objs
+
+SRCS = $(addprefix $(SRCDIR)/, $(SRC))
+OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
+
+HEADER = -I includes
+cc = gcc
 CFLAGS = -Wall -Wextra -Werror
-RAWFILES = 
-CSRCS = $(addsuffix .c, $(RAWFILES))
-OSRCS = $(addsuffix .o, $(RAWFILES))
-HEADER = fillit.h
+LIB = -L libft/ -lft
+
+.PHONY: all clean fclean re
+.SUFFIXES: .c .o
 
 all: $(NAME)
 
-$(NAME): $(OSRCS)
-	make -C libft/
-	$(CC) $(CFLAGS) -c $(CSRCS) $(HEADER)
-	$(CC) -o fillit $(OSRCS) $(HEADER) $(LIB)
+$(NAME): $(OBJS)
+	make -C libft/ fclean && make -C libft
+	$(CC) -o fillit $(CFLAGS) $(OBJS) $(HEADER) $(LIB)
 
-$(LIB): $(LIBOS)
-	@$(CC) $(CFLAGS) -c $(LIBCS) $(LIBHEAD)
-	@ar rcs $(LIB) $(LIBOS)
+$(OBJS): $(SRCS)
+	/bin/mkdir -p $(OBJDIR)
+	$(CC) -c $(CFLAGS) $(SRCS) $(HEADER)
+	/bin/mv $(OBJ) $(OBJDIR)/
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $<
+clean:
+	/bin/rm -rf $(OBJDIR)
+
+fclean: clean
+	/bin/rm -f $(NAME)
+
+re: fclean all

@@ -13,6 +13,9 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
+#   include "get_next_line.h"
+#   include "libft.h"
+
 typedef struct s_tetro
 {
     short *tetro;                       // tetro
@@ -22,5 +25,12 @@ typedef struct s_tetro
     char print;                         //   
     void    *next;  
 }              t_tetro;
+
+size_t coortoi(int row, int column, size_t size);
+void    itocoor(int *x, int *y, size_t index, size_t size);
+int    tetro_translate(unsigned short *dest);
+int     validate_tetro(unsigned short *tetro);
+void        to_bits(char *s, unsigned short *dst, int iter);
+int    read_input(const int fd, t_list **list);
 
 #endif
