@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 static int count_ones(unsigned short *tetro)
 {

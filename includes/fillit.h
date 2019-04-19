@@ -16,6 +16,8 @@
 #   include "get_next_line.h"
 #   include "libft.h"
 
+#include <stdio.h>                      // DONT FORGET TO REMOVE THIS INCLUDE
+
 typedef struct s_tetro
 {
     short *tetro;                       // tetro
@@ -26,11 +28,13 @@ typedef struct s_tetro
     void    *next;  
 }              t_tetro;
 
-size_t coortoi(int row, int column, size_t size);
+size_t  find_mapsize(size_t count);
+int     check_read_error(int res, t_list *list);
+size_t  coortoi(int row, int column, size_t size);
 void    itocoor(int *x, int *y, size_t index, size_t size);
-int    tetro_translate(unsigned short *dest);
+int     tetro_translate(unsigned short *dest);
 int     validate_tetro(unsigned short *tetro);
-void        to_bits(char *s, unsigned short *dst, int iter);
-int    read_input(const int fd, t_list **list);
+void    to_bits(char *s, unsigned short *dst, int iter);
+int     read_input(const int fd, t_list **list, size_t *count);
 
 #endif

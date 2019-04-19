@@ -6,7 +6,7 @@
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/20 10:03:12 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/04/14 15:16:03 by jdunnink      ########   odam.nl         */
+/*   Updated: 2019/04/19 18:49:25 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list			*ft_lstnew(void const *content, size_t content_size);
 
+
 unsigned char	ft_reversebits(unsigned char octet);
 unsigned char	ft_swapbits(unsigned char octet);
 char			*ft_itoa_base(int value, int base);
@@ -58,6 +59,7 @@ void			ft_bzero(void *s, size_t n);
 void			ft_swap(int *a, int *b);
 int				ft_atoi(const char *str);
 int				ft_abs(int nb);
+int				ft_sqrt(int nb);
 
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strtrim(char const *s);

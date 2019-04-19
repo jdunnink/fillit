@@ -19,6 +19,8 @@ SRC =	coortoi.c			\
 		read_input.c		\
 		main.c 				\
 		validate_tetro.c	\
+		check_read_error.c	\
+		find_mapsize.c		\
 
 OBJ = $(SRC:.c=.o)
 

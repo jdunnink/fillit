@@ -6,7 +6,7 @@
 #    By: jdunnink <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/03/20 09:33:47 by jdunnink      #+#    #+#                  #
-#    Updated: 2019/04/17 11:13:05 by jdunnink      ########   odam.nl          #
+#    Updated: 2019/04/19 18:50:09 by jdunnink      ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
@@ -76,7 +76,8 @@ SRC =	ft_swap.c			\
 		ft_swapbits.c		\
 		ft_memdup.c			\
 		ft_del.c			\
-		get_next_line.c
+		ft_sqrt.c			\
+		get_next_line.c		\
 
 OBJ = $(SRC:.c=.o)
 

@@ -12,32 +12,29 @@
 
 #include "fillit.h"
 
-int main(int argc, char **argv)
+int check_read_error(int res, t_list *list)
 {
-    t_list *tetros;
-    int fd;
-    int res;
-    size_t count;
-    size_t map_size;
-
-    tetros = NULL;
-    count = 0;
-    if (argc == 1)
+    if(res == -1)
+        printf("\nerror 1: GNL was not able to return a line\n");
+    else if (res == -2)
+        printf("\nerror 2: the length of the line read did not match a valid tetro.\n");
+    else if (res == -3)
+        printf("\nerror 3: translation error occurred in function tetro_translate\n");
+    else if (res == -4)
+        printf("\nerror 4: assembled tetromino was not valid\n");
+    else if (res == -5)
+        printf("\nerror 5: and invalid line was found in the input file\n");
+    
+    else if(res == -6)
+        printf("\nerror 6: undefined behavior\n");
+    else if (res == -7)
+        printf("\nerror 7: the number of tetros has exceeded the max.\n");
+    else if (res == 0)
     {
-        printf("error: no input file\n");
-        return (0);
+        printf("\nThe end of the file was reached, reading is completed\n");
+        return (1);
     }
-    fd = open(argv[1], O_RDONLY);
-    if (!fd || fd <= 0)
-        ft_putendl("\nerror: file could not be opened");
-    else
-        printf("\nfile was opened succesfully, fd == %i\n", fd);
-    res = read_input(fd, &tetros, &count);
-    if(check_read_error(res, tetros) == 0)
-        return (0);
-    printf("\n %lu tetros were found in the input file\n", count);
-    map_size = find_mapsize(count);
-    printf("\n The starting mapsize is %lu\n", map_size);
-    close(fd);
+    if (list == NULL)
+        printf("\nerror 8: No list has been created.\n");
     return (0);
 }
