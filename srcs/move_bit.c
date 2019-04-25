@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   coortoi.c                                          :+:    :+:            */
+/*   move_bit.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/19 12:59:46 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/04/19 13:00:03 by jdunnink      ########   odam.nl         */
+/*   Created: 2019/04/25 12:35:34 by jdunnink      #+#    #+#                 */
+/*   Updated: 2019/04/25 12:35:43 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-size_t	coortoi(int row, int column, size_t size)
+void move_bit(size_t index, size_t new_index, t_field *field)
 {
-	size_t index;
-
-	index = row * size + column;
-	return (index);
+    toggle_bit(index, field->size, field);
+    toggle_bit(new_index, field->size, field);
 }

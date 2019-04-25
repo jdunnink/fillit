@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   itocoor.c                                          :+:    :+:            */
+/*   ft_lstsearch.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
+/*   By: lravier <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/19 12:58:54 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/04/19 12:59:33 by jdunnink      ########   odam.nl         */
+/*   Created: 2019/04/23 16:43:07 by lravier       #+#    #+#                 */
+/*   Updated: 2019/04/23 16:47:17 by lravier       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/libft.h"
 
-void	itocoor(int *x, int *y, size_t index, size_t size)
+t_list	*ft_lstsearch(t_list **lst, t_list *(*find)(t_list *, void *), void *key)
 {
-	*x = index % size;
-	*y = index / size;
+	t_list *curr;
+
+	curr = *lst;
+	while (curr)
+	{
+		if(find(curr, key))
+			return (curr);
+		curr = curr->next;
+	}
+	return (NULL);
 }

@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   to_bits.c                                          :+:    :+:            */
+/*   add_bits.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/19 13:00:45 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/04/19 13:01:07 by jdunnink      ########   odam.nl         */
+/*   Created: 2019/04/25 12:35:15 by jdunnink      #+#    #+#                 */
+/*   Updated: 2019/04/25 17:12:07 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void        to_bits(char *s, unsigned short *dst, int iter)
+void toggle_bits(t_tetro tetro, t_field *field)
 {
-    int i;
-    unsigned short res;
-    int len;
-
-    len = strlen(s);
-    i = 0;
-    res = 0;
-    while (s[i] != '\0')
-    {
-        if (s[i] == '#')
-        {
-            res |= 1 << (len - (i + 1));
-        }
-        i++;
-    }
-	*dst |= res << (len * (len - 1) - (len * iter));
+    toggle_bit(tetro.pl_index1, field->size, field);
+    toggle_bit(tetro.pl_index2, field->size, field);
+    toggle_bit(tetro.pl_index3, field->size, field);
+    toggle_bit(tetro.pl_index4, field->size, field);
 }

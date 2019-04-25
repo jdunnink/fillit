@@ -6,31 +6,39 @@
 #    By: lravier <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/18 08:51:33 by lravier       #+#    #+#                  #
-#    Updated: 2019/04/18 10:34:18 by lravier       ########   odam.nl          #
+#    Updated: 2019/04/25 18:58:13 by jdunnink      ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fillit
 
-SRC =	coortoi.c			\
-		itocoor.c			\
-		tetro_translate.c	\
-		to_bits.c			\
-		read_input.c		\
-		main.c 				\
-		validate_tetro.c	\
-		check_read_error.c	\
-		find_mapsize.c		\
+SRC =	tetrominos_validation.c	\
+		tetrominos_setup.c		\
+		tetrominos_utility.c	\
+		fillit_utility.c		\
+		ft_error.c				\
+		read_input.c			\
+		main.c					\
+		print_solution.c		\
+		toggle_bit.c			\
+		create_field.c			\
+		print_part_field.c		\
+		print_field.c			\
+		add_bits.c				\
+		move_bit.c				\
+		move_bits.c				\
+		field_utility.c			\
+		map_solver.c			\
+		get_indexes.c			\
 
 OBJ = $(SRC:.c=.o)
-
 SRCDIR = srcs
 OBJDIR = objs
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
 
-HEADER = -I includes
+HEADER = -I includes/ -I libft/includes/
 cc = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIB = -L libft/ -lft
@@ -42,7 +50,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/ fclean && make -C libft
-	$(CC) -o fillit $(CFLAGS) $(OBJS) $(HEADER) $(LIB)
+	$(CC) -g -o fillit $(CFLAGS) $(OBJS) $(HEADER) $(LIB)
 
 $(OBJS): $(SRCS)
 	/bin/mkdir -p $(OBJDIR)
@@ -50,8 +58,8 @@ $(OBJS): $(SRCS)
 	/bin/mv $(OBJ) $(OBJDIR)/
 
 clean:
-	/bin/rm -rf $(OBJDIR)
-
+	/bin/rm -Rf $(OBJDIR)
+	/bin/rm -Rf *~ *#
 fclean: clean
 	/bin/rm -f $(NAME)
 

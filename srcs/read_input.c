@@ -1,68 +1,82 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bitboards.c                                        :+:    :+:            */
+/*   read_input.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lravier <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/18 10:35:17 by lravier       #+#    #+#                 */
-/*   Updated: 2019/04/18 11:34:27 by lravier       ########   odam.nl         */
+/*   Created: 2019/04/22 14:05:29 by lravier       #+#    #+#                 */
+/*   Updated: 2019/04/25 19:40:25 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int    read_input(const int fd, t_list **list, size_t *count)
+int		validate_tetro(unsigned short *tetro, size_t total_size)
 {
-    int r;
-    int i;
-    unsigned short dest;
-    char *line;
+	if (count_ones(tetro) != 4)
+		return (ft_error("Too many blocks in tetromino"));
+	if (!check_edges(tetro, total_size))
+		return (ft_error("Invalid tetromino shape found"));
+	return (1);
+}
 
-    dest = 0;
-    r = 1;
-    while(r == 1)
-    {
-        if(*count > 25)
-            return (-7);
-        i = 0;
-        ft_putchar('\n');
-        while (i < 4)
-        {
-            r = get_next_line(fd, &line);
-            if (r == -1)
-                return (-1);
-            if (r == 0)
-                return (0);
-            ft_putendl(line);
-            if (ft_strlen(line) == 4)
-                to_bits(line, &dest, i);
-            else
-                return (-2);
-            i++;
-        }
-        *count = *count + 1;
-        printf("\n This is tetro : %lu\n", *count);
-        ft_putchar('\n');
-        printf("The current tetro == %u\n", dest);
-        printf("the current tetro in binary == %s\n", ft_itoa_base(dest, 2));                                              
-        if (validate_tetro(&dest) == 1)
-        {
-            if(tetro_translate(&dest) == 1)
-                ft_lstpushfront(&dest, list, 1);
-            else
-                return (-3);
-        }
-        else
-            return (-4);
-        dest = 0;
-        r = get_next_line(fd, &line);
-        if (r == 0)
-            return (0);
-        if (line[0] == '\n' || line[0] == '\0')
-            continue;
-        else
-            return (-5);
-    }
-    return (-6);
+
+int		read_tetromino(int *lr, int fd, char **line, unsigned short *dst)
+{
+	int i;
+
+	i = 0;
+	while (i < SIZE)
+	{
+		*lr = get_next_line(fd, line);
+		if (*lr == 0)
+			return (0);
+		if (*lr < 0)
+			return(ft_error("Invalid file or problem while reading"));
+		if (!(valid_characters(*line, '#', '.')))
+			return(ft_error("Invalid character found"));
+		if (!(ft_strlen(*line) == 4))
+			return(ft_error("Invalid line width"));
+		to_bits(*line, dst, i, '#');
+		i++;
+	}
+	return (1);
+}
+
+int		read_input(int fd, t_list **list, size_t *count)
+{
+	int test;
+	int lr;
+	char *line;
+	unsigned short dst;
+	size_t total_size;
+
+	total_size = SIZE * SIZE;
+	lr = 1;
+	line = NULL;
+	while (lr == 1)
+	{
+		if (*count > 25)
+			return (ft_error("Too many tetrominos"));
+		test = read_tetromino(&lr, fd, &line, &dst);
+		if (test != 1)
+			return (test);
+		*count += 1;
+		if (validate_tetro(&dst, total_size))
+		{
+			tetro_translate(&dst, total_size);
+			if (!add_tetro(dst, *count, list, total_size))
+				return (ft_error("Something went wrong while creating the list"));
+		}
+		else
+			return(ft_error("Invalid tetromino found"));
+		dst = 0;
+		lr = get_next_line(fd, &line);
+		if (lr == 0)
+			return (0);
+		if (!(line[0] == '\n' || line[0] == '\0'))
+			return (ft_error("Unexpected character encountered"));
+	}
+	return (0);
 }

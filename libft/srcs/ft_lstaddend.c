@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bitboards.c                                        :+:    :+:            */
+/*   ft_lstaddend.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lravier <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/18 10:35:17 by lravier       #+#    #+#                 */
-/*   Updated: 2019/04/18 11:34:27 by lravier       ########   odam.nl         */
+/*   Created: 2019/03/25 16:00:42 by lravier       #+#    #+#                 */
+/*   Updated: 2019/04/20 14:12:30 by lravier       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/libft.h"
 
-// starting mapsize == sqrt(number of tetros * 4)
-
-static int		ft_is_prime(int c)
+int		ft_lstaddend(t_list **begin_list, void *content, size_t n)
 {
-	int i;
+	t_list *new;
+	t_list *tmp;
 
-	i = 2;
-	if (c <= 1)
-		return (0);
-	while (i <= c / i)
+	tmp = *begin_list;
+	new = ft_lstnew(content, n);
+	if (!new)
+		return(0);
+	if (*begin_list == NULL)
+		*begin_list = new;
+	else
 	{
-		if (c % i == 0)
-			return (0);
-		i++;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 	return (1);
-}
-
-size_t find_mapsize(size_t count)
-{
-    while (ft_is_prime(ft_sqrt(count * 4)) == 0)
-        count--;
-    return (count * 4);
 }

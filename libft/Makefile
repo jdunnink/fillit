@@ -6,7 +6,7 @@
 #    By: jdunnink <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/03/20 09:33:47 by jdunnink      #+#    #+#                  #
-#    Updated: 2019/04/19 18:50:09 by jdunnink      ########   odam.nl          #
+#    Updated: 2019/04/23 16:47:41 by lravier       ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
@@ -78,7 +78,8 @@ SRC =	ft_swap.c			\
 		ft_del.c			\
 		ft_sqrt.c			\
 		get_next_line.c		\
-
+		ft_lstaddend.c		\
+		ft_lstsearch.c
 OBJ = $(SRC:.c=.o)
 
 SRCDIR = srcs
