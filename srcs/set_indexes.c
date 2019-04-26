@@ -1,6 +1,7 @@
+
 #include "fillit.h"
 
-void 	get_index(size_t *n, unsigned short *t, unsigned short *mask, int *i)
+static void 	get_index(size_t *n, unsigned short *t, unsigned short *mask, int *i)
 {
     *n = 0U;
     while (*i < 16)
@@ -17,7 +18,7 @@ void 	get_index(size_t *n, unsigned short *t, unsigned short *mask, int *i)
     }
 }
 
-size_t  get_row_l(size_t index)
+static size_t  get_row_l(size_t index)
 {
     size_t row;
 
@@ -32,7 +33,7 @@ size_t  get_row_l(size_t index)
     return (row);
 }
 
-void    convert_indexes(t_tetro *t)
+static void    convert_indexes(t_tetro *t)
 {
     size_t row;
 

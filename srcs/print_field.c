@@ -1,18 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   print_field.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/04/25 09:12:51 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/04/25 09:12:52 by jdunnink      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "fillit.h"
 
-static void print_fieldrow_bottom(t_field field, size_t total_size, size_t width)       // print the rows of the bottom two partial fields
+static void print_fieldrow_bottom(t_field field, size_t total_size, size_t width)
 {
     unsigned long long tmp;
     size_t size;
@@ -46,7 +35,7 @@ static void print_fieldrow_bottom(t_field field, size_t total_size, size_t width
     ft_putchar('\n');
 }
 
-static void print_fieldrow_top(t_field field, size_t total_size, size_t width)         // print the rows of the top two partial fields
+static void print_fieldrow_top(t_field field, size_t total_size, size_t width)
 {
     unsigned long long tmp;
     size_t size;
@@ -80,7 +69,7 @@ static void print_fieldrow_top(t_field field, size_t total_size, size_t width)  
     ft_putchar('\n');
 }
 
-void    print_field(t_field field)                                             // print the complete field
+void    print_field(t_field field)
 {
     size_t width;
     size_t total_size;
