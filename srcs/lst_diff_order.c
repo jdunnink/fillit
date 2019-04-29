@@ -1,36 +1,59 @@
 
 #include "fillit.h"
 
-t_list *lst_diff_order(t_list *tetros)
+static void list_sort(t_list *tetros)
 {
-    t_list *curr;
+    t_list *iter;
     t_list *trail;
-    t_tetro *tmp;
-    t_tetro *current;
-    t_tetro *trailing;
+    t_list *tmp;
 
-    curr = tetros->next;
+    iter = tetros->next;
     trail = tetros;
-    while(curr)
+    while (iter)
     {
-        current = (t_tetro *)curr->content;
-        trailing = (t_tetro *)trail->content;
-        if (trailing->order > current->order)
+        if (((t_tetro*)iter->content)->order < (((t_tetro*)trail->content)->order))
         {
-            tmp = (t_tetro *)curr->content;
-            curr->content = trail->content;
+            tmp = iter->content;
+            iter->content = trail->content;
             trail->content = tmp;
-            return (tetros);
+            trail = tetros;
+            iter = tetros->next;
         }
-        trail = curr;
-        curr = curr->next;
+        else
+        {
+            iter = iter->next;
+            trail = trail->next;
+        }
     }
-    curr = tetros->next;
-    trail = tetros;
-    current = (t_tetro *)curr->content;
-    trailing = (t_tetro *)trail->content;
-    tmp = (t_tetro *)curr->content;
-    curr->content = trail->content;
-    trail->content = tmp;
-    return (tetros);
+}
+
+
+int lst_diff_order(t_list *tetros)
+{
+    t_list *iter;
+    t_tetro *comp;
+    t_tetro *tmp;
+
+    printf("\nLDO IS CALLED\n");
+
+    comp = tetros->content;
+    printf("\ncurrent first: %lu\n", comp->order);
+    iter = tetros->next;
+    while(iter)
+    {
+        printf("\ntarget: %lu\n", ((t_tetro*)iter->content)->order);
+        if (((t_tetro*)iter->content)->order > (comp->order))
+        { 
+            printf("\nA swap has been found:\n"); 
+            tmp = tetros->content;
+            tetros->content = iter->content;
+            iter->content = tmp;
+            list_sort(tetros->next);
+            return (1);
+        }
+        iter = iter->next;
+    }
+    list_sort(tetros);
+    printf("\nNo swap has been found --> POP\n"); 
+    return (-1);
 }

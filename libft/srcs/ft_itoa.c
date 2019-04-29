@@ -40,13 +40,11 @@ char			*ft_itoa(int n)
 {
 	char			*dest;
 	int				neg;
-	int				temp;
 	size_t			len;
 
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	neg = 0;
-	temp = n;
 	neg = is_negative(&n);
 	len = find_length(n, neg);
 	dest = (char*)malloc(sizeof(char) * len);

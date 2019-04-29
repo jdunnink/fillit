@@ -45,8 +45,8 @@ void	itocoor(int *x, int *y, size_t index, size_t size);
 
 // SOLVER //
 int solver(t_field *dest, t_list *tetros, size_t num_tetros);
-int solve_pos(t_field *map, t_tetro *tetro);
+int solve_pos(t_field map, t_tetro *tetro, t_field *tmp);
 
 // LISTS //
-t_list *lst_diff_order(t_list *tetros);
+int lst_diff_order(t_list *tetros);
 void toggle_bits(t_tetro tetro, t_field *field);

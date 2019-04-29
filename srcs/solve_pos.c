@@ -22,32 +22,19 @@ static int check_fit_field(t_field map, t_field tmp)
     return (1);
 }
 
-static t_field combine_fields(t_field map, t_field tmp)
+int solve_pos(t_field map, t_tetro *tetro, t_field *tmp)
 {
-    t_field dest;
-
-    dest.top_left = map.top_left | tmp.top_left;
-    dest.top_right = map.top_right | tmp.top_right;
-    dest.bot_left = map.bot_left | tmp.bot_left;
-    dest.bot_right = map.bot_right | tmp.bot_right;
-    return (dest);
-}
-
-int solve_pos(t_field *map, t_tetro *tetro)
-{
-    t_field tmp;
-
-    tmp = create_field(256);
+    *tmp = create_field(256);
 	tetro->pl_index1 = tetro->og_index1;
 	tetro->pl_index2 = tetro->og_index2;
 	tetro->pl_index3 = tetro->og_index3;
 	tetro->pl_index4 = tetro->og_index4;
-    toggle_bits(*tetro, &tmp);
+    toggle_bits(*tetro, tmp);
     printf("\nThe current tetro: \n");
-    print_field(tmp);
-    while (check_fit_field(*map, tmp) == 0)
+    print_field(*tmp);
+    while (check_fit_field(map, *tmp) == 0)
     {
-        toggle_bits(*tetro, &tmp);
+        toggle_bits(*tetro, tmp);
         if((*tetro).pl_index1 + 1 >= 255)
             return (0);
         (*tetro).pl_index1++;
@@ -60,14 +47,9 @@ int solve_pos(t_field *map, t_tetro *tetro)
         if((*tetro).pl_index4 + 1 >= 255)
             return (0);
         (*tetro).pl_index4++;
-        toggle_bits(*tetro, &tmp);
+        toggle_bits(*tetro, tmp);
     }
-	if (check_fit_field(*map, tmp) == 1)
-	{
-    	*map = combine_fields(*map, tmp);
-        printf("\nA tetro has been placed in the map \n");
-        print_field(*map);
+	if (check_fit_field(map, *tmp) == 1)
 		return (1);
-	}
 	return (0);
 }

@@ -15,6 +15,8 @@
 void	ft_del(void *content, size_t content_size)
 {
 	if (content)
-		free(content);
-	content_size = 0;
+	{
+		if (content_size)
+			free(content);
+	}
 }
