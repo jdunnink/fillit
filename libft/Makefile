@@ -79,7 +79,7 @@ SRC =	ft_swap.c			\
 		ft_sqrt.c			\
 		get_next_line.c		\
 		ft_lstaddend.c		\
-		ft_lstsearch.c
+
 OBJ = $(SRC:.c=.o)
 
 SRCDIR = srcs

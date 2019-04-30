@@ -32,7 +32,7 @@ static size_t min_mapsize(size_t count)
     size_t i;
 
     count *= 4;
-    i = 0;
+    i = 2;
     while (i * i < count)
         i++;
     return (i);
@@ -56,15 +56,10 @@ static int solve_map(t_field field, t_list *tetros, t_field *dest)
     int res;
 
     res = 0;
-    printf("\nSOLVE_MAP IS CALLED\n");
-    printf("\nThe current field:\n");
-    print_field(field);
     if (tetros)
     {
-        printf("\nTetros remaining in the list\n");
         if (solve_pos(field, tetros->content, &tmp) == 1)
         {
-            printf("\ncurrent tetro fits --> PUSH\n");
             res = solve_map(combine_fields(field, tmp), tetros->next, dest);
             if (res == - 1)
             {
@@ -79,16 +74,11 @@ static int solve_map(t_field field, t_list *tetros, t_field *dest)
                 return (-1);
         }
         else
-        {
-            printf("\ncurrent tetro does not fit --> POP\n");
             return (-1);
-        }
     }
     else
     {
-        printf("\nA Valid square has been found --> POP\n");
         *dest = field;
-        dest->size = field.size;
         return (1);
     }
     return (1);
@@ -99,26 +89,18 @@ int solver(t_field *dest, t_list *tetros, size_t num_tetros)
     size_t size;
     t_field field;
 
-    printf("\nSOLVER IS CALLED\n");
-
     size = min_mapsize(num_tetros);
     while(size < 16)
     {
         field = create_field(size * size);
-        printf("\nA new field has been created\n");
         if (solve_map(field, tetros, dest) == 1)
-        {
-            printf("\nA solution has been found\n");
             return (1);
-        }
         else
         {
-            printf("\nNo solution at current size, increasing field\n");
             size++;
             list_sort(tetros);
             field = create_field(256);
         }
     }
-    printf("\nNo viable solution wiithin parameters\n");
     return (0);
 }

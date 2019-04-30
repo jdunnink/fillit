@@ -12,17 +12,17 @@
 
 #include "../includes/libft.h"
 
-int		ft_lstaddend(t_list **begin_list, void *content, size_t n)
+int		ft_lstaddend(t_list **begin, void *content, size_t size)
 {
 	t_list *new;
 	t_list *tmp;
 
-	tmp = *begin_list;
-	new = ft_lstnew(content, n);
+	tmp = *begin;
+	new = ft_lstnew(content, size);
 	if (!new)
-		return(0);
-	if (*begin_list == NULL)
-		*begin_list = new;
+		return (0);
+	if (*begin == NULL)
+		*begin = new;
 	else
 	{
 		while (tmp->next != NULL)

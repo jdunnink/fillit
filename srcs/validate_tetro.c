@@ -23,22 +23,22 @@ static int	check_connections(size_t index, size_t total_size, unsigned short *te
 
 	count = 0;
 	i = index - 1;
-	if (!((i + 1) % SIZE == 0))		//left border
+	if (!((i + 1) % SIZE == 0))
 	{
 		if (*tetro & (1 << (i + 1)))
 			count++;
 	}
-	if (!(i % SIZE == 0))		//right border
+	if (!(i % SIZE == 0))
 	{
 		if (*tetro & (1 << (i - 1)))
 			count++;
 	}
-	if (i < total_size - SIZE)		//top border
+	if (i < total_size - SIZE)
 	{
 		if (*tetro & (1 << (SIZE + i)))
 			count++;
 	}
-	if (i >= SIZE)				//bottom_border
+	if (i >= SIZE)
 	{
 		if (*tetro & (1 << (i - SIZE)))
 			count++;

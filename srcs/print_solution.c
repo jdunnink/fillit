@@ -6,13 +6,13 @@
 /*   By: lravier <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/23 09:45:04 by lravier       #+#    #+#                 */
-/*   Updated: 2019/04/30 11:18:40 by jdunnink      ########   odam.nl         */
+/*   Updated: 2019/04/30 17:33:28 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static size_t  get_row_q(size_t index, size_t o_size)
+static	size_t	get_row_q(size_t index, size_t o_size)
 {
 	size_t row;
 
@@ -21,7 +21,7 @@ static size_t  get_row_q(size_t index, size_t o_size)
 	return (row);
 }
 
-static size_t convert(size_t index, size_t n_width, size_t o_width)
+static	size_t	convert(size_t index, size_t n_width, size_t o_width)
 {
 	size_t new;
 	size_t diff;
@@ -41,7 +41,7 @@ static size_t convert(size_t index, size_t n_width, size_t o_width)
 	return (new);
 }
 
-static void	place_tetro(t_tetro *t, char **map, size_t size)
+static	void	place_tetro(t_tetro *t, char **map, size_t size)
 {
 	int x;
 	int y;
@@ -68,7 +68,7 @@ static void	place_tetro(t_tetro *t, char **map, size_t size)
 	map[x][y] = t->print;
 }
 
-static void		place_tetraminos(char **map, t_list **lst, size_t size)
+static	void	place_tetraminos(char **map, t_list **lst, size_t size)
 {
 	t_list *curr;
 
@@ -80,7 +80,7 @@ static void		place_tetraminos(char **map, t_list **lst, size_t size)
 	}
 }
 
-static char		**initialize_array(size_t size)
+static	char	**initialize_array(size_t size)
 {
 	char **res;
 	size_t i;
@@ -97,7 +97,7 @@ static char		**initialize_array(size_t size)
 	return (res);
 }
 
-void	print_solution(t_field *field, t_list **lst)
+void			print_solution(t_field *field, t_list **lst)
 {
 	size_t i;
 	size_t j;

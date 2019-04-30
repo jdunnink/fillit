@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   read_input.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/04/30 17:33:42 by jdunnink      #+#    #+#                 */
+/*   Updated: 2019/04/30 17:35:30 by jdunnink      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	find_first(t_tetro *t)
+static	void	find_first(t_tetro *t)
 {
 	unsigned short mask;
 	size_t i;
@@ -16,7 +27,7 @@ static void	find_first(t_tetro *t)
 	t->og_index1 = i;
 }
 
-static int		add_tetro(unsigned short tetr, size_t count, t_list **lst)
+static	int		add_tetro(unsigned short tetr, size_t count, t_list **lst)
 {
 	t_tetro *t;
 
@@ -33,7 +44,7 @@ static int		add_tetro(unsigned short tetr, size_t count, t_list **lst)
 	return (1);
 }
 
-int		read_input(int fd, t_list **list, size_t *count)
+int				read_input(int fd, t_list **list, size_t *count)
 {
 	int test;
 	int lr;

@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   read_tetromino.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/04/30 17:36:59 by jdunnink      #+#    #+#                 */
+/*   Updated: 2019/04/30 17:38:13 by jdunnink      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fillit.h"
 
-static void        to_bits(char *s, unsigned short *dst, int iter, char f)
+static	void	to_bits(char *s, unsigned short *dst, int iter, char f)
 {
     int i;
     unsigned short res;
@@ -19,7 +30,7 @@ static void        to_bits(char *s, unsigned short *dst, int iter, char f)
 	*dst |= res << (len * (len - 1) - (len * iter));
 }
 
-static int		valid_characters(char *line, char f, char e)
+static	int		valid_characters(char *line, char f, char e)
 {
 	size_t i;
 
@@ -33,7 +44,7 @@ static int		valid_characters(char *line, char f, char e)
 	return (1);
 }
 
-int		read_tetromino(int *lr, int fd, char **line, unsigned short *dst)
+int				read_tetromino(int *lr, int fd, char **line, unsigned short *dst)
 {
 	int i;
 

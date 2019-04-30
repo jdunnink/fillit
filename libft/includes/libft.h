@@ -48,7 +48,6 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list			*ft_lstnew(void const *content, size_t content_size);
 
-
 unsigned char	ft_reversebits(unsigned char octet);
 unsigned char	ft_swapbits(unsigned char octet);
 char			*ft_itoa_base(int value, int base);
@@ -100,6 +99,6 @@ void			ft_putendl(char const *s);
 void			ft_putnbr(int n);
 void			ft_putchar(char c);
 void			ft_putstr(char const *str);
-int				ft_lstaddend(t_list **begin_list, void *content, size_t content_size);
-t_list			*ft_lstsearch(t_list **lst, t_list *(*find)(t_list *, void *), void *key);
+int				ft_lstaddend(t_list **begin, void *content, size_t size);
+
 #endif
