@@ -50,3 +50,7 @@ int solve_pos(t_field map, t_tetro *tetro, t_field *tmp);
 // LISTS //
 int lst_diff_order(t_list *tetros);
 void toggle_bits(t_tetro tetro, t_field *field);
+
+// PRINTING //
+
+void    print_solution(t_field *field, t_list **lst);

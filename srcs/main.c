@@ -24,6 +24,6 @@ int main(int argc, char **argv)
 	if (res != 0)
 		return (-1);
     res = solver(&dest, tetros, count);
-    print_field(dest);
+	print_solution(&dest, &tetros);
     return (0);
 }

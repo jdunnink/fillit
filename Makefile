@@ -6,7 +6,7 @@
 #    By: lravier <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/18 08:51:33 by lravier       #+#    #+#                  #
-#    Updated: 2019/04/25 18:58:13 by jdunnink      ########   odam.nl          #
+#    Updated: 2019/04/30 11:16:31 by jdunnink      ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
@@ -26,6 +26,7 @@ SRC =	create_field.c			\
 		tetro_translate.c 		\
 		toggle_bits.c			\
 		validate_tetro.c 		\
+		print_solution.c		\
 
 OBJ = $(SRC:.c=.o)
 SRCDIR = srcs

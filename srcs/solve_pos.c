@@ -30,8 +30,6 @@ int solve_pos(t_field map, t_tetro *tetro, t_field *tmp)
 	tetro->pl_index3 = tetro->og_index3;
 	tetro->pl_index4 = tetro->og_index4;
     toggle_bits(*tetro, tmp);
-    printf("\nThe current tetro: \n");
-    print_field(*tmp);
     while (check_fit_field(map, *tmp) == 0)
     {
         toggle_bits(*tetro, tmp);

@@ -46,6 +46,7 @@ static t_field combine_fields(t_field map, t_field tmp)
     dest.top_right = map.top_right | tmp.top_right;
     dest.bot_left = map.bot_left | tmp.bot_left;
     dest.bot_right = map.bot_right | tmp.bot_right;
+    dest.size = map.size;
     return (dest);
 }
 
@@ -87,6 +88,7 @@ static int solve_map(t_field field, t_list *tetros, t_field *dest)
     {
         printf("\nA Valid square has been found --> POP\n");
         *dest = field;
+        dest->size = field.size;
         return (1);
     }
     return (1);

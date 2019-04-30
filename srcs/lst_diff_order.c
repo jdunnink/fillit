@@ -27,7 +27,6 @@ static void list_sort(t_list *tetros)
     }
 }
 
-
 int lst_diff_order(t_list *tetros)
 {
     t_list *iter;
