@@ -5,21 +5,21 @@
 /*                                                     +:+                    */
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/30 17:22:02 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/04/30 17:22:12 by jdunnink      ########   odam.nl         */
+/*   Created: 2019/05/03 15:21:24 by jdunnink      #+#    #+#                 */
+/*   Updated: 2019/05/03 17:48:22 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_error(char *s)
+int	ft_error(char *s)
 {
 	int i;
 
 	i = 0;
 	while (s[i] != '\0')
 	{
-		write(2, &s[i], 1);
+		write(1, &s[i], 1);
 		i++;
 	}
 	ft_putchar('\n');

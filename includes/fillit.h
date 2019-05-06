@@ -1,47 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   fillit.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/05/03 17:38:42 by jdunnink       #+#    #+#                */
+/*   Updated: 2019/05/06 12:01:00 by jdunnink      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FILLIT_H
+
+# define FILLIT_H
+# include "libft.h"
 # include "get_next_line.h"
 # define SIZE 4
 
-typedef struct s_tetro
+# include <stdint.h>
+# include <stdio.h>
+
+typedef struct	s_tetro
 {
-    unsigned short tetro;
-    size_t order;
-    size_t og_index1;
-    size_t pl_index1;
-    size_t og_index2;
-    size_t pl_index2;
-    size_t og_index3;
-    size_t pl_index3;
-    size_t og_index4;
-    size_t pl_index4;
-    char print;
-}              t_tetro;
+	uint64_t		tetro;
+	uint16_t		fpt;
+	unsigned char	x;
+	unsigned char	y;
+	size_t			order;
+	size_t			width;
+	size_t			height;
+	t_list			*last;
+	char			print;
+}				t_tetro;
 
-typedef struct s_field
-{
-    unsigned long long top_left;
-    unsigned long long top_right;
-    unsigned long long bot_left;
-    unsigned long long bot_right;
-    size_t  size;
-}               t_field;
+void			free_list(t_list **lst);
+void			free_map(char **map, size_t mapsize);
+size_t			available_space(uint16_t *map, size_t mapsize);
+size_t			lst_len(t_list **lst);
+int				read_input(int fd, t_list **list, size_t *count);
+int				add_tetro(uint16_t tetr, size_t count, t_list **lst);
+uint64_t		convert_sll(uint16_t t);
+void			itocoor(int *x, int *y, size_t index, size_t size);
+int				ft_error(char *s);
+int				read_tetromino(int *lr, int fd, char **l, uint16_t *d);
+int				validate_tetro(uint16_t *tetro, size_t total_size);
+int				checker(uint16_t *map, t_list **tetros, size_t num_tetros);
+void			tetro_translate (uint16_t *tetro, size_t total_size);
+int				initialize_map(uint16_t **map);
+int				find_perm(t_list *lst, t_list *pos, uint16_t *map, size_t min);
+int				solver(uint16_t *map, t_list **tetros, size_t map_size);
+int				solve_map(uint16_t *map, t_list **tetros, size_t map_size);
+int				solve_ps(t_list *curr, size_t size, uint16_t *mp, size_t i);
+void			list_sort(t_list *tetros);
+void			print_solution (t_list **tetros, size_t mapsize);
+void			toggle_tetro(uint16_t *map, t_tetro *tetro);
+int				count_ones(uint16_t *tetro);
+int				solve_it(t_list **tetros, uint16_t *map, size_t mapsize);
+uint64_t		convert_sll(uint16_t t);
+size_t			min_mapsize(size_t num_tetros);
 
-int		read_input(int fd, t_list **list, size_t *count);
-int		ft_error(char *s);
-int		read_tetromino(int *lr, int fd, char **line, unsigned short *dst);
-int		validate_tetro(unsigned short *tetro, size_t total_size);
-void    tetro_translate (unsigned short *tetro, size_t total_size);
-void    set_indexes(t_tetro *t);
-
-void    print_field(t_field field);
-t_field create_field(size_t total_size);
-void	itocoor(int *x, int *y, size_t index, size_t size);
-
-int solver(t_field *dest, t_list *tetros, size_t num_tetros);
-int solve_pos(t_field map, t_tetro *tetro, t_field *tmp);
-
-int lst_diff_order(t_list *tetros);
-void toggle_bits(t_tetro tetro, t_field *field);
-
-void    print_solution(t_field *field, t_list **lst);
+#endif

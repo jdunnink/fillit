@@ -1,28 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   tetro_translate.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/05/03 18:16:26 by jdunnink      #+#    #+#                 */
+/*   Updated: 2019/05/04 14:39:45 by jdunnink      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	get_mask(unsigned short *top_row, unsigned short *left_col, size_t total_size)
+static	void	get_mask(uint16_t *top, uint16_t *left, size_t size)
 {
 	size_t i;
 
-	i = total_size - SIZE;
-	while (i < total_size)
+	i = size - SIZE;
+	while (i < size)
 	{
-		*top_row |=  1 << i;
+		*top |= 1U << i;
 		i++;
 	}
 	i = SIZE - 1;
-	while (i < total_size)
+	while (i < size)
 	{
-		*left_col |= 1 << i;
+		*left |= 1U << i;
 		i += SIZE;
 	}
 }
 
-void tetro_translate (unsigned short *tetro, size_t total_size)
+void			tetro_translate(uint16_t *tetro, size_t total_size)
 {
-	unsigned short top_row;
-	unsigned short left_col;
+	uint16_t top_row;
+	uint16_t left_col;
 
 	top_row = 0;
 	left_col = 0;

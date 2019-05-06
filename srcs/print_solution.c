@@ -3,87 +3,19 @@
 /*                                                        ::::::::            */
 /*   print_solution.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: lravier <marvin@codam.nl>                    +#+                     */
+/*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/04/23 09:45:04 by lravier       #+#    #+#                 */
-/*   Updated: 2019/04/30 17:33:28 by jdunnink      ########   odam.nl         */
+/*   Created: 2019/05/03 15:38:05 by jdunnink       #+#    #+#                */
+/*   Updated: 2019/05/06 12:22:44 by lravier       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static	size_t	get_row_q(size_t index, size_t o_size)
-{
-	size_t row;
-
-	row = 0;
-	row = index / o_size;
-	return (row);
-}
-
-static	size_t	convert(size_t index, size_t n_width, size_t o_width)
-{
-	size_t new;
-	size_t diff;
-	size_t row;
-
-	row = get_row_q(index, o_width);
-	if (o_width < n_width)
-	{
-		diff = o_width - n_width;
-		new = index - (diff * row);
-	}
-	else
-	{
-		diff = n_width - o_width;
-		new = index + (diff * row);
-	}
-	return (new);
-}
-
-static	void	place_tetro(t_tetro *t, char **map, size_t size)
-{
-	int x;
-	int y;
-	size_t index;
-
-	index = t->pl_index1;
-	convert(index, size, 16);
-	itocoor(&x, &y, t->pl_index1, 16);
-	map[x][y] = t->print;
-
-	index = t->pl_index2;
-	convert(index, size, 16);
-	itocoor(&x, &y, t->pl_index2, 16);
-	map[x][y] = t->print;
-
-	index = t->pl_index3;
-	convert(index, size, 16);
-	itocoor(&x, &y, t->pl_index3, 16);
-	map[x][y] = t->print;
-
-	index = t->pl_index4;
-	convert(index, size, 16);
-	itocoor(&x, &y, t->pl_index4, 16);
-	map[x][y] = t->print;
-}
-
-static	void	place_tetraminos(char **map, t_list **lst, size_t size)
-{
-	t_list *curr;
-
-	curr = *lst;
-	while (curr)
-	{
-		place_tetro(curr->content, map, size);
-		curr = curr->next;
-	}
-}
-
 static	char	**initialize_array(size_t size)
 {
-	char **res;
-	size_t i;
+	char	**res;
+	size_t	i;
 
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * size);
@@ -97,39 +29,81 @@ static	char	**initialize_array(size_t size)
 	return (res);
 }
 
-void			print_solution(t_field *field, t_list **lst)
+static	void	fill_array(char **res, size_t mapsize)
 {
-	size_t i;
-	size_t j;
-	size_t size;
-	char **map;
+	size_t	i;
+	size_t	j;
 
-	size = ft_sqrt(field->size);
-	map = initialize_array(size);
 	i = 0;
 	j = 0;
-	while (i < size)
+	while (j < mapsize)
 	{
-		j = 0;
-		while (j < size)
+		i = 0;
+		while (i < mapsize)
 		{
-			map[i][j] = '.';
-			j++;
+			res[j][i] = '.';
+			i++;
 		}
-		i++;
+		j++;
 	}
+}
+
+static	void	put_map(char **res, size_t mapsize)
+{
+	size_t	i;
+	size_t	j;
+
 	i = 0;
 	j = 0;
-	place_tetraminos(map, lst, size);
-	while (i < size)
+	while (j < mapsize)
 	{
-		j = 0;
-		while (j < size)
+		i = 0;
+		while (i < mapsize)
 		{
-			ft_putchar(map[j][i]);
-			j++;
+			ft_putchar(res[j][i]);
+			i++;
 		}
 		ft_putchar('\n');
-		i++;
+		j++;
 	}
+}
+
+static	void	place_tetro(t_tetro *t, char **map)
+{
+	size_t		i;
+	int			x;
+	int			y;
+	uint16_t	mask;
+
+	mask = (1U << 15);
+	i = 0;
+	x = 0;
+	y = 0;
+	while (mask)
+	{
+		if (mask & t->fpt)
+		{
+			itocoor(&x, &y, i, 4);
+			map[y + t->y][x + t->x] = t->print;
+		}
+		i++;
+		mask >>= 1;
+	}
+}
+
+void			print_solution(t_list **tetros, size_t mapsize)
+{
+	char		**res;
+	t_list		*curr;
+
+	res = initialize_array(mapsize);
+	fill_array(res, mapsize);
+	curr = *tetros;
+	while (curr)
+	{
+		place_tetro(curr->content, res);
+		curr = curr->next;
+	}
+	put_map(res, mapsize);
+	free_map(res, mapsize);
 }

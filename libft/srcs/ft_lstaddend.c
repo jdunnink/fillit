@@ -6,11 +6,11 @@
 /*   By: lravier <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/25 16:00:42 by lravier       #+#    #+#                 */
-/*   Updated: 2019/04/20 14:12:30 by lravier       ########   odam.nl         */
+/*   Updated: 2019/05/04 14:35:24 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 int		ft_lstaddend(t_list **begin, void *content, size_t size)
 {

@@ -6,7 +6,7 @@
 #    By: jdunnink <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/03/20 09:33:47 by jdunnink      #+#    #+#                  #
-#    Updated: 2019/04/23 16:47:41 by lravier       ########   odam.nl          #
+#    Updated: 2019/05/04 14:33:06 by jdunnink      ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
@@ -96,7 +96,7 @@ CC = gcc
 
 NAME = libft.a
 
-CFLAGS = -c -Wall -Wextra -Werror
+CFLAGS = -c
 
 .PHONY: all clean fclean re
 .SUFFIXES: .c .o
