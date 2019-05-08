@@ -6,7 +6,7 @@
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/03 17:44:09 by jdunnink       #+#    #+#                */
-/*   Updated: 2019/05/06 12:16:21 by lravier       ########   odam.nl         */
+/*   Updated: 2019/05/06 13:46:17 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int		tetro_wh(t_tetro *t, uint16_t msk, uint16_t *visit, size_t i)
 	uint16_t	prev_visited;
 	size_t		total_size;
 
+	prev_visited = 0;
+	total_size = 0;
 	total_size = SIZE * SIZE;
 	if ((msk & t->fpt) != 0 && (*visit & msk) == 0)
 	{
@@ -57,6 +59,7 @@ static	void	find_last(t_list **lst, t_tetro *t)
 	t_list *tmp;
 	t_list *last;
 
+	last = NULL;
 	tmp = *lst;
 	while (tmp)
 	{
@@ -69,7 +72,7 @@ static	void	find_last(t_list **lst, t_tetro *t)
 	}
 }
 
-t_tetro			set_attributes(uint16_t tetr, size_t count)
+static t_tetro	set_attributes(uint16_t tetr, size_t count)
 {
 	t_tetro t;
 
@@ -92,6 +95,9 @@ int				add_tetro(uint16_t tetr, size_t count, t_list **lst)
 	uint16_t	mask;
 	uint16_t	visited;
 
+	visited = 0;
+	mask = 0;
+	index = 0;
 	t = set_attributes(tetr, count);
 	index = find_first(tetr);
 	mask = (1U << index);

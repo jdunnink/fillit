@@ -30,39 +30,15 @@ static	void	to_bits(char *s, uint16_t *dst, int iter, char f)
 	*dst |= res << (len * (len - 1) - (len * iter));
 }
 
-static	int		valid_characters(char *line, char f, char e)
-{
-	size_t i;
-
-	i = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] != f && line[i] != e)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int				read_tetromino(int *lr, int fd, char **l, unsigned short *d)
+void			read_tetromino(char **tetros, uint16_t *dst)
 {
 	int i;
 
 	i = 0;
+	*dst = 0;
 	while (i < SIZE)
 	{
-		*lr = get_next_line(fd, l);
-		if (*lr == 0)
-			return (ft_error("error"));
-		if (*lr < 0)
-			return (ft_error("error"));
-		if (!(valid_characters(*l, '#', '.')))
-			return (ft_error("error"));
-		if (!(ft_strlen(*l) == 4))
-			return (ft_error("error"));
-		to_bits(*l, d, i, '#');
+		to_bits(tetros[i], dst, i, '#');
 		i++;
-		free(*l);
 	}
-	return (1);
 }

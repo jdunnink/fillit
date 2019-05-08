@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/05/06 11:57:53 by jdunnink      #+#    #+#                 */
-/*   Updated: 2019/05/06 13:01:49 by jdunnink      ########   odam.nl         */
+/*   Created: 2019/05/06 11:57:53 by jdunnink       #+#    #+#                */
+/*   Updated: 2019/05/07 10:48:01 by lravier       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,17 @@ void	free_map(char **map, size_t mapsize)
 		i++;
 	}
 	free(map);
+}
+
+void	free_tetro(char **tetro)
+{
+	int i;
+
+	i = 0;
+	while (tetro[i])
+	{
+		free(tetro[i]);
+		i++;
+	}
+	free(tetro);
 }

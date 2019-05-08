@@ -6,7 +6,7 @@
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/03 17:38:42 by jdunnink       #+#    #+#                */
-/*   Updated: 2019/05/06 12:01:00 by jdunnink      ########   odam.nl         */
+/*   Updated: 2019/05/08 11:16:52 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # define SIZE 4
-
 # include <stdint.h>
-# include <stdio.h>
 
 typedef struct	s_tetro
 {
@@ -42,7 +40,7 @@ int				add_tetro(uint16_t tetr, size_t count, t_list **lst);
 uint64_t		convert_sll(uint16_t t);
 void			itocoor(int *x, int *y, size_t index, size_t size);
 int				ft_error(char *s);
-int				read_tetromino(int *lr, int fd, char **l, uint16_t *d);
+void			read_tetromino(char **l, uint16_t *d);
 int				validate_tetro(uint16_t *tetro, size_t total_size);
 int				checker(uint16_t *map, t_list **tetros, size_t num_tetros);
 void			tetro_translate (uint16_t *tetro, size_t total_size);
@@ -58,5 +56,6 @@ int				count_ones(uint16_t *tetro);
 int				solve_it(t_list **tetros, uint16_t *map, size_t mapsize);
 uint64_t		convert_sll(uint16_t t);
 size_t			min_mapsize(size_t num_tetros);
+void			free_tetro(char **tetro);
 
 #endif

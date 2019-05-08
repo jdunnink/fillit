@@ -64,8 +64,8 @@ static	int	check_edges(uint16_t *tetro, size_t total_size)
 int			validate_tetro(uint16_t *tetro, size_t total_size)
 {
 	if (count_ones(tetro) != 4)
-		return (ft_error("error"));
+		return (0);
 	if (!check_edges(tetro, total_size))
-		return (ft_error("error"));
+		return (0);
 	return (1);
 }

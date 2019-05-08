@@ -6,7 +6,7 @@
 /*   By: jdunnink <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/04 13:48:05 by jdunnink       #+#    #+#                */
-/*   Updated: 2019/05/06 12:05:54 by lravier       ########   odam.nl         */
+/*   Updated: 2019/05/07 11:56:12 by jdunnink      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,6 @@ static	int		check_fit(uint16_t *map, t_tetro *tetro)
 	if ((*(uint64_t *)(map + tetro->y) & (tetro->tetro >> tetro->x)) == 0)
 		return (1);
 	return (0);
-}
-
-static	int		same_rest(t_list *curr, t_list *rest)
-{
-	t_list	*r;
-	t_tetro *rc;
-	t_tetro *ch;
-
-	r = rest;
-	ch = curr->content;
-	if (!r)
-		return (0);
-	while (r)
-	{
-		rc = r->content;
-		if (ch->fpt != rc->fpt)
-			return (0);
-		r = r->next;
-	}
-	ch->x = 0;
-	ch->y = 0;
-	return (1);
 }
 
 static int		check_pos(uint16_t *map, size_t size, t_list *lst, size_t index)
@@ -58,8 +36,6 @@ static int		check_pos(uint16_t *map, size_t size, t_list *lst, size_t index)
 				if (solve_map(map, &lst->next, size))
 					return (1);
 				toggle_tetro(map, tro);
-				if (same_rest(lst, lst->next))
-					return (0);
 			}
 			tro->x++;
 		}

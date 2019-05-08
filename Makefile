@@ -6,7 +6,7 @@
 #    By: lravier <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/18 08:51:33 by lravier        #+#    #+#                 #
-#    Updated: 2019/05/06 11:58:52 by jdunnink      ########   odam.nl          #
+#    Updated: 2019/05/08 11:18:48 by jdunnink      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC =	read_input.c			\
 		solve_ps.c				\
 		list_len.c				\
 		available_space.c		\
-		starting_size.c 		\
+		checker.c		 		\
 		min_mapsize.c			\
 		freeer.c				\
 
