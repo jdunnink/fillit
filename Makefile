@@ -6,7 +6,7 @@
 #    By: lravier <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/18 08:51:33 by lravier        #+#    #+#                 #
-#    Updated: 2019/05/08 11:18:48 by jdunnink      ########   odam.nl          #
+#    Updated: 2019/05/08 12:11:47 by lravier       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,23 +18,19 @@ SRC =	read_input.c			\
 		solver.c				\
 		tetro_translate.c		\
 		validate_tetro.c 		\
-		list_sort.c				\
 		print_solution.c		\
 		toggle_tetro.c			\
 		add_tetro.c				\
-		find_perm.c			 	\
 		ft_error.c 				\
 		itocoor.c				\
 		count_ones.c 			\
 		index_conversion.c 		\
-		sizer.c					\
 		solve_map.c				\
 		solve_ps.c				\
-		list_len.c				\
 		available_space.c		\
-		checker.c		 		\
 		min_mapsize.c			\
 		freeer.c				\
+		list_len.c
 
 OBJ = $(SRC:.c=.o)
 SRCDIR = srcs
@@ -54,7 +50,7 @@ LIB = -L libft/ -lft
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft/ fclean && make -C libft
+	make -C libft/ 
 	$(CC) -o fillit $(CFLAGS) $(OBJS) $(HEADER) $(LIB)
 
 $(OBJS): $(SRCS)
