@@ -36,6 +36,6 @@ is 5x5. With only four shapes, the problem is not very difficult. However, as th
 
 
 An additional requirement of this project is that, when multiple solutions are possible, the right solution is the one where the order of shapes within the square matches
-the order in which they were provided to the program. This additional requirement limits the amount of right solutions in all cases to one and significantly increases the time complexity of the algorithm.
+the order in which they were provided to the program. This additional requirement limits the amount of right solutions in all cases to one, and significantly increases the time complexity of the algorithm.
 
 To compile the fillit executable, run the 'make' command in the root.
